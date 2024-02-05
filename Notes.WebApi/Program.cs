@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
@@ -24,6 +25,18 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin();
     });
 });
+
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer("Bearer", options => 
+    {
+        options.Authority = "https://localhost:7074/";
+        options.Audience = "NotesWebApi";
+        options.RequireHttpsMetadata = false;
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -53,6 +66,7 @@ app.UseRouting();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowAll");
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();
