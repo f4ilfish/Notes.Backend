@@ -17,10 +17,5 @@ namespace Notes.Persistance
             builder.ApplyConfiguration(new NoteConfiguration());
             base.OnModelCreating(builder);
         }   
-
-        Task<int> INotesDbContext.SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

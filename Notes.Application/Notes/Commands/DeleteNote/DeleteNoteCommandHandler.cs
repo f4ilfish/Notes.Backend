@@ -16,8 +16,7 @@ namespace Notes.Application.Notes.Commands.DeleteNote
             CancellationToken cancellationToken)
         { 
             var entity = await _dbContext.Notes
-                .FindAsync(new object[] { request.Id }, 
-                cancellationToken);
+                .FindAsync(new object[] { request.Id }, cancellationToken);
 
             if (entity == null || entity.UserId != request.UserId) 
             {

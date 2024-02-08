@@ -56,7 +56,8 @@ namespace Notes.Tests.Notes.Commands
                 new CreateNoteCommand
                 {
                     Title = "NoteTitle",
-                    UserId = NotesContextFactory.UserAId
+                    UserId = NotesContextFactory.UserAId,
+                    Details ="Details"
                 }, CancellationToken.None);
 
             // Act
@@ -67,7 +68,6 @@ namespace Notes.Tests.Notes.Commands
                     {
                         Id = noteId,
                         UserId = NotesContextFactory.UserBId,
-
                     },
                     CancellationToken.None));
         }
